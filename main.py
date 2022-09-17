@@ -2,12 +2,26 @@
 
     """
 
-from mirutil.latex import ret_pathes_4_latex_dirtree_forest
+import json
+from pathlib import Path
+import shutil
 
+from githubdata import GithubData
+from mirutil.latex import make_txt4_forest_tree
+
+
+class GDUrl :
+    with open('gdu.json' , 'r') as f :
+        gj = json.load(f)
+
+    src = gj['src']
+
+gu = GDUrl()
 
 class Param :
-    root_dir = '/Users/mahdi/Library/CloudStorage/OneDrive-khatam.ac.ir/Heidari Data/V2'
-    gitignore_file = '/Users/mahdi/Library/CloudStorage/OneDrive-khatam.ac.ir/Heidari Data/V2/.gitignore'
+    root = '/Users/mahdi/Library/CloudStorage/OneDrive-khatam.ac.ir/Datasets/Heidari Data/V2'
+    root_dir = Path(root)
+    gitignore_file = root_dir / '.gitignore'
 
 p = Param()
 
@@ -15,14 +29,23 @@ def main() :
     pass
 
     ##
-    fu = ret_pathes_4_latex_dirtree_forest
-    res = fu(p.root_dir , p.gitignore_file , only_dirs = True)
-    print(res)
-
+    gs = GithubData(gu.src)
+    gs.overwriting_clone()
     ##
-    with open('res.txt' , 'w') as fi :
-        fi.write(res)
-        print('saved as res.txt')
+    fp = gs.local_path / '.gitignore'
+    nfp = p.gitignore_file
+    shutil.copy(fp , nfp)
+    ##
+    fu = make_txt4_forest_tree
+    tx = fu(p.root_dir , p.gitignore_file , only_dirs = True)
+    print(tx)
+    ##
+    with open('tree.txt' , 'w') as fi :
+        fi.write(tx)
+    ##
+
+    nfp.unlink()
+    gs.rmdir()
 
     ##
 
