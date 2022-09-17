@@ -1,1 +1,2 @@
-mirutil~=4.11
+mirutil~=5.0
+githubdata~=8.2
