@@ -15,11 +15,11 @@
 [CB-Index-Q]
 [Home-M]]
 [USD
+[Annual]
 [Bonbast-D]
 [GovUSD-M]
 [Monthly]
-[OHLC-D]
-[USD-A]]]
+[OHLC-D]]]
 [TSE
 [Board
 [About-Shares
@@ -55,7 +55,8 @@
 [Funds
 [Holding
 [Monthly]
-[Quarterly]]]
+[Quarterly]]
+[Portfo-Composition]]
 [Market-level
 [HafezDB-Duration]
 [IPO-Date]
